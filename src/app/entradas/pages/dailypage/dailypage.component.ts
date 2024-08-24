@@ -4,7 +4,7 @@ import { reporteService} from '../../services/reporte.service';  // Asegúrate d
 import { reporte } from '../../interfaces/reporte'; 
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatTableDataSource } from '@angular/material/table';
-import html2pdf from 'html2pdf.js';
+import html2pdf from 'html2pdf.d.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
