@@ -62,7 +62,7 @@ export class RegistropageComponent {
       },
       (error) => {
         console.error('Error al iniciar sesión:', error);
-        this.snackBar.open('Error en el inicio de sesión. Por favor, intente nuevamente.', 'Cerrar', { duration: 3000, panelClass: ['error-snackbar'] });
+        this.snackBar.open('Correo o contraseña incorrectos. Por favor ingrese un usuario valido.', 'Cerrar', { duration: 3000, panelClass: ['error-snackbar'] });
       }
     );
   }
