@@ -6,6 +6,9 @@
 /out-tsc
 /bazel-out
 
+# .gitignore
+#node_modules/html2pdf.js/dist/html2pdf.d.ts
+
 
 # Node
 /node_modules
