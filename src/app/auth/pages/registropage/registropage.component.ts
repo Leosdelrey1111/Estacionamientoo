@@ -15,7 +15,6 @@ export class RegistropageComponent {
   logForm: FormGroup;
   showLoginForm = false; 
 
-  
   constructor(
     private fb: FormBuilder,
     private router: Router,
