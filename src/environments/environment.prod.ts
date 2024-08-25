@@ -1,3 +1,4 @@
 export const environment = {
-    baseUrl: 'https://backend1-production-7218.up.railway.app/'
-}
+    baseUrl: 'https://backend1-production-7218.up.railway.app' // Asegúrate de incluir 'https://'
+  };
+  
