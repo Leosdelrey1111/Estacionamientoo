@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 export class SupplierService {
   private baseUrl: string = environment.baseUrl; // Asegúrate de que esta URL sea correcta
 
+  
   constructor(private http: HttpClient) {}
 
   registerSupplier(supplier: Supplier): Observable<any> {
