@@ -2,44 +2,45 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../interfaces/usuario';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/usuarios';
-
+  private baseUrl: string = environment.baseUrl;
+  
   constructor(private http: HttpClient) {}
 
   validateUser(usr: string, cont: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl + '/login', { user: usr, contrasena: cont });
+    return this.http.post<any>(this.baseUrl + '/login', { user: usr, contrasena: cont });
   }
 
   registerUser(usuario: Usuario): Observable<any> {
-    return this.http.post<any>(this.apiUrl, usuario);
+    return this.http.post<any>(this.baseUrl, usuario);
   }
 
   updateUser(id: string, usuario: Usuario): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, usuario);
+    return this.http.put<any>(`${this.baseUrl}/${id}`, usuario);
   }
 
   deleteUser(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
 
   searchUser(query: { id?: string, name?: string }): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.apiUrl + '/search', { params: query });
+    return this.http.get<Usuario[]>(this.baseUrl + '/search', { params: query });
   }
 
   getAllUsers(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.apiUrl + '/all');
+    return this.http.get<Usuario[]>(this.baseUrl + '/all');
   }
 
   searchUserByBarcode(barcode: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/barcode/${barcode}`,);
+    return this.http.get<any>(`${this.baseUrl}/barcode/${barcode}`,);
   }
 
   changePassword(email: string, oldPassword: string, newPassword: string): Observable<any> {
-    return this.http.put<any>(this.apiUrl+'/change-password', { email, oldPassword, newPassword });
+    return this.http.put<any>(this.baseUrl+'/change-password', { email, oldPassword, newPassword });
   }
 }

@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Vehiculo } from '../interfaces/vehiculo'; 
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
-  private baseUrl = 'http://localhost:3000/vehicleRoutes'; // Adjust URL if needed
+  private baseUrl: string = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
