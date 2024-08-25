@@ -4,7 +4,7 @@ import { reporteService} from '../../services/reporte.service';  // Asegúrate d
 import { reporte } from '../../interfaces/reporte'; 
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatTableDataSource } from '@angular/material/table';
-import html2pdf from 'html2pdf.js';
+import * as html2pdf from 'html2pdf.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -129,7 +129,7 @@ export class DailypageComponent {
     };
 
     // Captura el contenido del PDF
-    html2pdf().from(this.pdfContent!.nativeElement).set(options).save();
+    html2pdf.default().from(this.pdfContent!.nativeElement).set(options).save();
 
     this.snackBar.open(
       `Descargando PDF`,

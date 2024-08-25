@@ -22,7 +22,9 @@
         "@angular/router": "^18.0.0",
         "canvas": "^2.11.2",
         "estacionamiento": "file:",
+        "html2canvas": "^1.4.1",
         "jsbarcode": "^3.11.6",
+        "jspdf": "^2.5.1",
         "rxjs": "~7.8.0",
         "tslib": "^2.3.0",
         "zone.js": "~0.14.3"
