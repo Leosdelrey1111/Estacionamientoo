@@ -30,6 +30,7 @@
         "core-js",
         "raf",
         "rgbcolor"
+
         
       ],
             "outputPath": "dist/estacionamiento",
