@@ -2,18 +2,17 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../entradas/services/usuario.service';
-import { Log } from '../../../entradas/interfaces/log'; // Asegúrate de que la ruta sea correcta
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-registropage',
   templateUrl: './registropage.component.html',
-  styles: `` 
+  styles: [] 
 })
 export class RegistropageComponent {
 
   logForm: FormGroup;
-  showLoginForm = false; 
+  showLoginForm = false;
 
   constructor(
     private fb: FormBuilder,
@@ -37,25 +36,25 @@ export class RegistropageComponent {
 
   entrar() {
     if (this.logForm.invalid) {
-      // Manejo de errores de formulario
       this.snackBar.open('Por favor, complete todos los campos correctamente.', 'Cerrar', { duration: 3000, panelClass: ['error-snackbar'] });
       return;
     }
 
     const { email: user, password: contrasena } = this.logForm.value;
 
+    console.log(`Enviando solicitud de inicio de sesión con: user=${user}, contrasena=${contrasena}`);
+
     this.userService.validateUser(user, contrasena).subscribe(
-      (res: Log) => {
-        console.log(res);
+      (res) => {
+        console.log('Respuesta de inicio de sesión:', res);
         sessionStorage.setItem('user', JSON.stringify(res['user']));
         if (res.TipoUsuario === 'Administrador') {
-          this.router.navigate(['/admin/registro']); // Redirige al dashboard del administrador
+          this.router.navigate(['/admin/registro']);
           this.snackBar.open('Bienvenido Administrador!', 'Cerrar', { duration: 3000, panelClass: ['success-snackbar'] });
         } else if (res.TipoUsuario === 'Empleado') {
-          this.router.navigate(['/entradas/list']); // Redirige al dashboard del empleado
+          this.router.navigate(['/entradas/list']);
           this.snackBar.open('Bienvenido Empleado!', 'Cerrar', { duration: 3000, panelClass: ['success-snackbar'] });
         } else {
-          // Manejo de otros tipos de usuarios si aplica
           this.router.navigate(['/entradas/perfil']);
           this.snackBar.open('Bienvenido Usuario!', 'Cerrar', { duration: 3000, panelClass: ['success-snackbar'] });
         }
@@ -72,7 +71,6 @@ export class RegistropageComponent {
   }
 
   onSubmit() {
-    console.log('Iniciar sesión con', this.logForm.value.email);
     this.entrar();
   }
 }

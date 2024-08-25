@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Usuario } from '../interfaces/usuario';
+import { Usuario } from '../interfaces/usuario'; // Asegúrate de que la ruta sea correcta
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -9,11 +9,11 @@ import { environment } from '../../../environments/environment';
 })
 export class UserService {
   private baseUrl: string = environment.baseUrl;
-  
+
   constructor(private http: HttpClient) {}
 
-  validateUser(usr: string, cont: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/login`, { user: usr, contrasena: cont });
+  validateUser(user: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/usuarios/login`, { user, contrasena: password });
   }
 
   registerUser(usuario: Usuario): Observable<any> {
