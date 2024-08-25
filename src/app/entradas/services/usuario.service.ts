@@ -12,8 +12,8 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  validateUser(user: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/usuarios/login`, { user, contrasena: password });
+  validateUser(usr: string, cont: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/login`, { user: usr, contrasena: cont });
   }
 
   registerUser(usuario: Usuario): Observable<any> {
