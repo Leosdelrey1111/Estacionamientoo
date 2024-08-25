@@ -36,32 +36,51 @@ export class RegistropageComponent {
 
   entrar() {
     if (this.logForm.invalid) {
-      this.snackBar.open('Por favor, complete todos los campos correctamente.', 'Cerrar', { duration: 3000, panelClass: ['error-snackbar'] });
+      this.snackBar.open('Por favor, complete todos los campos correctamente.', 'Cerrar', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
       return;
     }
 
-    const { email: user, password: contrasena } = this.logForm.value;
+    const { email, password } = this.logForm.value;
 
-    console.log(`Enviando solicitud de inicio de sesión con: user=${user}, contrasena=${contrasena}`);
+    console.log(`Enviando solicitud de inicio de sesión con: email=${email}, password=${password}`);
 
-    this.userService.validateUser(user, contrasena).subscribe(
+    this.userService.validateUser(email, password).subscribe(
       (res) => {
         console.log('Respuesta de inicio de sesión:', res);
-        sessionStorage.setItem('user', JSON.stringify(res['user']));
-        if (res.TipoUsuario === 'Administrador') {
-          this.router.navigate(['/admin/registro']);
-          this.snackBar.open('Bienvenido Administrador!', 'Cerrar', { duration: 3000, panelClass: ['success-snackbar'] });
-        } else if (res.TipoUsuario === 'Empleado') {
-          this.router.navigate(['/entradas/list']);
-          this.snackBar.open('Bienvenido Empleado!', 'Cerrar', { duration: 3000, panelClass: ['success-snackbar'] });
-        } else {
-          this.router.navigate(['/entradas/perfil']);
-          this.snackBar.open('Bienvenido Usuario!', 'Cerrar', { duration: 3000, panelClass: ['success-snackbar'] });
+        sessionStorage.setItem('user', JSON.stringify(res.user));
+        const userType = res.TipoUsuario;
+        let redirectUrl = '';
+        let message = '';
+
+        switch (userType) {
+          case 'Administrador':
+            redirectUrl = '/admin/registro';
+            message = 'Bienvenido Administrador!';
+            break;
+          case 'Empleado':
+            redirectUrl = '/entradas/list';
+            message = 'Bienvenido Empleado!';
+            break;
+          default:
+            redirectUrl = '/entradas/perfil';
+            message = 'Bienvenido Usuario!';
         }
+
+        this.router.navigate([redirectUrl]);
+        this.snackBar.open(message, 'Cerrar', {
+          duration: 3000,
+          panelClass: ['success-snackbar']
+        });
       },
       (error) => {
         console.error('Error al iniciar sesión:', error);
-        this.snackBar.open('Correo o contraseña incorrectos. Por favor ingrese un usuario valido.', 'Cerrar', { duration: 3000, panelClass: ['error-snackbar'] });
+        this.snackBar.open('Correo o contraseña incorrectos. Por favor ingrese un usuario válido.', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
       }
     );
   }
