@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Empleado } from '../interfaces/empleado';
 import { environment } from '../../../environments/environment';
 
@@ -18,6 +18,7 @@ export class EmpleadoService {
   addTrabajador(newTrabajador: Empleado): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}/trabajadores`, newTrabajador)
       .pipe(
+        tap(response => console.log('Respuesta del backend:', response)),
         catchError((error) => {
           console.error('Error al agregar trabajador:', error);
           return of(undefined as any);
