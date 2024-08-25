@@ -1,3 +1,4 @@
 export const environment = {
-    baseUrl: 'http://Estacionamiento-utng'
-}
+    baseUrl: 'https://backend1-production-7218.up.railway.app' // Asegúrate de incluir 'https://'
+  };
+  
