@@ -4,7 +4,7 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "build": "ng build",
+        "build": "ng build --configuration production",
         "watch": "ng build --watch --configuration development",
         "test": "ng test"
     },
@@ -31,7 +31,7 @@
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^18.0.6",
-        "@angular/cli": "^18.0.6",
+        "@angular/cli": "^18.2.1",
         "@angular/compiler-cli": "^18.0.0",
         "@types/jasmine": "~5.1.0",
         "html2pdf.js": "^0.10.2",
